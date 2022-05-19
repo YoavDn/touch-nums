@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Touch Nums</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>Touch Nums</h2>
+
+    <div class="level-box">
+      <h1>Choose Your Level</h1>
+      <form action="">
+        <label for="check-box1">Easy (16)</label>
+        <input type="checkbox" id="check-box1" />
+        <label for="check-box1">Medium (25)</label>
+        <input type="checkbox" id="check-box2" />
+        <label for="check-box1">Hard (36)</label>
+        <input type="checkbox" id="check-box3" />
+      </form>
+    </div>
+    <button onclick="newGame(this)">Start</button>
+    <div class="game-info">
+      <h3 class="time">
+        Game Time: <br />
+        <span class="game-time">--</span>
+      </h3>
+      <h3>
+        Next number: <br />
+        <span class="next-number">--</span>
+      </h3>
+    </div>
+
+    <table></table>
+
+    <script src="/main.js"></script>
+  </body>
+</html>
