@@ -17,7 +17,7 @@ body {
   flex-direction: column;
   justify-content: center;
   background: linear-gradient(to right bottom, #151515, #5c5c5c);
-  overflow: hidden;
+
   align-items: center;
 }
 
@@ -97,4 +97,8 @@ form {
 }
 .lost {
   color: #f34213;
+}
+
+.stop-table-events {
+  pointer-events: none;
 }

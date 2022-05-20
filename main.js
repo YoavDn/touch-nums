@@ -10,26 +10,50 @@ var elCheckBox3 = document.getElementById("check-box3");
 
 var diff;
 var nums = [];
-var isTimeRunning = true;
+var gsetInterval;
+var gGameTimeOut;
+var timer;
+var timeout1;
+var timeout2;
+var timeout3;
+function countDown() {
+  timer = (timer -= 0.01).toFixed(3);
+
+  elGameTime.innerHTML = timer;
+}
+
+function stopTime() {
+  clearInterval(gsetInterval);
+}
+function resetTimeOut() {
+  clearTimeout(gGameTimeOut);
+}
 
 function newGame(elBtn) {
   if (!elCheckBox1.checked && !elCheckBox2.checked && !elCheckBox3.checked) {
     alert("You need to choose difficulty !!!!!!");
     return;
   }
+  clearTimeout(timeout1);
+  clearTimeout(timeout2);
+  clearTimeout(timeout3);
+  stopTime();
+  resetDom();
+  elBtn.innerText = "New Game";
+  timer = 30;
+
   if (elCheckBox1.checked) diff = 16;
   if (elCheckBox2.checked) diff = 25;
   if (elCheckBox3.checked) diff = 36;
 
-  elTable.innerHTML = "";
-  elBtn.innerText = "New Game";
+  gsetInterval = setInterval(countDown, 10);
+  gGameTimeOut = setGameTimeout(timer);
+
   nums = [];
   resetNum(diff);
   renderTable(nums);
 
-  setGameTime(45);
   elNextNum.innerText = "1";
-  //   elNextNum.classList.remove("win");
 }
 
 function renderTable(arr) {
@@ -56,6 +80,7 @@ function numClick(elCell) {
   if (+elNextNum.innerText > diff) {
     elCell.classList.add("num-click");
     won();
+    stopTime();
   }
   elCell.classList.add("num-click");
 }
@@ -64,23 +89,18 @@ function won() {
   elNextNum.innerText = "Won";
   elNextNum.classList.add("win");
   isTimeRunning = false;
-  setGameTime();
+  stopTime();
 }
 function lost() {
+  //   elGameTime.classList.add("lost");
+  elTable.classList.add("stop-table-events");
   elGameTime.innerText = "You Lost";
-  elGameTime.classList.add("lost");
 }
 
-function setGameTime(sec = 0) {
-  var time = () => (elGameTime.innerHTML = (sec -= 0.01).toFixed(3));
-  var stopTime = () => clearInterval(startClock);
-  var startClock = setInterval(time, 10);
-
-  setTimeout(stopTime, sec * 1000);
-  setTimeout(lost, sec * 1000);
-  if (!isTimeRunning) {
-    time = elGameTime.innerText;
-  }
+function setGameTimeout(sec = 0) {
+  timeout1 = setTimeout(stopTime, sec * 1000);
+  timeout2 = setTimeout(lost1, (sec - 5) * 1000);
+  timeout3 = setTimeout(lost, sec * 1000);
 }
 
 function shuffle(arr) {
@@ -94,12 +114,15 @@ function resetNum(diff) {
   shuffle(nums);
 }
 
-// function getTime() {
-//   return elGameTime.innerText;
-// }
+function resetDom() {
+  elTable.innerHTML = "";
+  elGameTime.innerHTML = 30;
+  elGameTime.classList.remove("lost");
+  elTable.classList.remove("stop-table-events");
+}
 
-// function resetTime() {
-//   elTime.innerHTML = `Game Time: <br />
-//         <span class="game-time">--</span>
-//       `;
-// }
+function lost1() {
+  elGameTime.classList.add("lost");
+}
+
+clearTimeout(a);
