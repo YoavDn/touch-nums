@@ -16,6 +16,7 @@ var timer;
 var timeout1;
 var timeout2;
 var timeout3;
+
 function countDown() {
   timer = (timer -= 0.01).toFixed(3);
 
@@ -88,8 +89,6 @@ function numClick(elCell) {
 function won() {
   elNextNum.innerText = "Won";
   elNextNum.classList.add("win");
-  isTimeRunning = false;
-  stopTime();
 }
 function lost() {
   //   elGameTime.classList.add("lost");
@@ -119,6 +118,7 @@ function resetDom() {
   elGameTime.innerHTML = 30;
   elGameTime.classList.remove("lost");
   elTable.classList.remove("stop-table-events");
+  elNextNum.classList.remove("won");
 }
 
 function lost1() {
